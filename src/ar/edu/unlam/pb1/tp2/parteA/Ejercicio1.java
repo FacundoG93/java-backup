@@ -16,7 +16,6 @@ public class Ejercicio1 {
         int cantidadCaracteres= ejemplo.length();
         System.out.println("\nLa cantidad de caracteres en el string es de: "+cantidadCaracteres);
 
-
         //     toLowerCase(): Converts all of the characters in this String to lower case using the rules of the default locale.
         String MINUSCULAS = ejemplo.toLowerCase();
         System.out.println("\nEl string todo en minuscula es: "+ MINUSCULAS);
