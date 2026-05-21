@@ -141,14 +141,14 @@ public class Tarjeta {
     public double obtenerDescuento(double montoDescuento) {
         double descuento = 0.0;
 
-        // Evaluamos rangos de mayor a menor para evitar solapamientos
-        if (montoDescuento >= 10000 && montoDescuento < 50000) {
-            descuento = montoDescuento * 0.15; // 15%
+        // Evaluamos: si es mayor o igual a 10000 (sin ponerle techo de 50000)
+        if (montoDescuento >= 10000) {
+            descuento = montoDescuento * 0.15; // Aplica 15%
         } else if (montoDescuento >= 1000 && montoDescuento < 10000) {
-            descuento = montoDescuento * 0.05; // 5%
+            descuento = montoDescuento * 0.05; // Aplica 5%
         }
 
-        // Aplicamos el tope fijo de 20.000
+        // Si el 15% calculado supera los 20.000 (por ejemplo en una compra de $150.000), se clava en el tope
         if (descuento > 20000) {
             descuento = 20000;
         }
