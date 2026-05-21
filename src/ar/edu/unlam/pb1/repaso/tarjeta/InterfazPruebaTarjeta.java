@@ -66,6 +66,15 @@ public class InterfazPruebaTarjeta {
                     System.out.println("OPeración no valida.\n");
                     break;
             }
-        } while (operacion!=6);
+        } while (operacion != 6); // Tu cierre del menú existente
+
+        // --- RESUMEN FINAL AL SALIR ---
+        System.out.println("\n=========================================");
+        System.out.println("       RESUMEN DE OPERACIONES DE HOY      ");
+        System.out.println("=========================================");
+        System.out.println("Cantidad de regalos realizados: " + miTarjeta.getTotalRegalos());
+        System.out.println("Total de saldo gastado: $" + miTarjeta.getTotalSaldoGastado());
+        System.out.println("Saldo actual disponible en tarjeta: $" + miTarjeta.getSaldo());
+        System.out.println("=========================================");
     }
 }

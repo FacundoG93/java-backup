@@ -113,37 +113,55 @@ public class Tarjeta {
 
 
     //5. Aplicar descuento por la promoción
-    public void aplicarDescuentoPromocion(double montoPromo){
+    public void aplicarDescuentoPromocion(double montoPromo) {
+        // 1. Consultamos cuánto descuento le corresponde a este monto
+        double descuentoAutilizar = obtenerDescuento(montoPromo);
 
-        //Indica si se pudo aplicar el descuento
-        //1- Se debe verificar si el monto ingresado puede acceder a un descuento, consultar el método obtenerDescuento(monto)
-            //1.2- Si accede al descuento:
-                //1.2.1- Actualiza saldo disponible restando el monto final
-                //1.2.2- Aplica el descuento correspondiente
-                //1.2.3- Confirma operación de compra
+        // 2. Calculamos el precio real final que se le va a cobrar al usuario
+        double montoFinalConDescuento = montoPromo - descuentoAutilizar;
 
-                //1.2.4- Contabiliza regalos comprados
-                //1.2.5- Contabiliza el total del saldo gastado en TODAS las compras
+        // 3. Verificamos si hay saldo suficiente para afrontar el costo final
+        if (this.saldo >= montoFinalConDescuento) {
+            this.saldo -= montoFinalConDescuento; // Restamos el dinero
 
-            //1.3- Si no accede al descuento se informa
+            // Sumamos las estadísticas globales de la tarjeta
+            this.totalRegalos += 1;
+            this.totalSaldoGastado += montoFinalConDescuento;
+
+            System.out.println("¡Compra con promoción completada con éxito!");
+            System.out.println("Monto original: $" + montoPromo + " | Descuento aplicado: $" + descuentoAutilizar);
+            System.out.println("Saldo cobrado final: $" + montoFinalConDescuento);
+        } else {
+            System.out.println("No se puede realizar la compra, el saldo es insuficiente.");
+        }
     }
 
 
     //MEOTODS PARA REALIZAR LOS DE LA INTERFAZ
-    public double obtenerDescuento(double montoDescuento){
-        double descuento = 0.0; //inicializamos primero en 0
-        //1 Si hay suficiente saldo
+    public double obtenerDescuento(double montoDescuento) {
+        double descuento = 0.0;
 
-        if (montoDescuento>=1.000 && montoDescuento<10.000){ //1.1- If compra >= 1.000   &&   compra<10.000  then  Descuento=5%
-            descuento= montoDescuento*0.05;
-        } else if (montoDescuento<50.000) {
-            descuento= montoDescuento*0.15;
+        // Evaluamos rangos de mayor a menor para evitar solapamientos
+        if (montoDescuento >= 10000 && montoDescuento < 50000) {
+            descuento = montoDescuento * 0.15; // 15%
+        } else if (montoDescuento >= 1000 && montoDescuento < 10000) {
+            descuento = montoDescuento * 0.05; // 5%
         }
 
-        if (descuento >20000){ //1.3- El descuento máximo debe ser de 20.000, si se supera, asignar este valor
-            descuento = 20.0000;
+        // Aplicamos el tope fijo de 20.000
+        if (descuento > 20000) {
+            descuento = 20000;
         }
 
         return descuento;
+    }
+
+    //PARTE FINAL, ya sería el return del resumen esto
+    public int getTotalRegalos() {
+        return totalRegalos;
+    }
+
+    public double getTotalSaldoGastado() {
+        return totalSaldoGastado;
     }
 }
