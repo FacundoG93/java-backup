@@ -1,21 +1,32 @@
 package ar.edu.unlam.pb1.tp2old;
 
-public class Persona {
-    int edad;
-    double peso, altura;
-    long dni;
-    public String nombre, genero; //variable de instancia vs constante
-    final static String apellido = "Gutierrez"; //Esta es una constante
-    boolean viva;
+public class Persona{
+    String Nombre;
+    String Genero;
+    long DNI;
+    float peso;
+    float altura;
 
-    //Constructor metodo que se ejecuta cuando haces new
-    public Persona(String nombre) {
-        this.nombre=nombre;
-         //apellido= "Fernandez";
+    public Persona(String Nombre, String Genero, long DNI, float peso, float altura){
+        this.Nombre = Nombre;
+        this.Genero = Genero;
+        this.DNI = DNI;
+        this.peso = peso;
+        this.altura= altura;
+
     }
 
-
-    public void saltar() {
-        System.out.println(nombre + " esta saltando!");
+    public void mostrarNombre(){
+        System.out.println("Hola, mí nombre es "+Nombre);
     }
+
+    public void saltar(){
+        System.out.println("Salto. Ya salté.");
+    }
+
+    public void alimentar(float cantidadComida){
+        peso+=cantidadComida;
+        System.out.println(Nombre+" comíó "+cantidadComida+"kg de comida.");
+    }
+
 }
